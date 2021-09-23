@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Android Sample</string>
+    <string name="workmanager">Workmanager</string>
+    <string name="start">Start</string>
 </resources>
