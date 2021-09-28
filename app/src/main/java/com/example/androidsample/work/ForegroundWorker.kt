@@ -1,5 +1,6 @@
 package com.example.androidsample.work
 
+import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
@@ -45,10 +46,10 @@ class ForegroundWorker(context: Context, parameters: WorkerParameters) :
 
     private fun createForegroundInfo(): ForegroundInfo {
         val id = "1225"
-        val channelName = "Downloads Notification"
-        val title = "Downloading"
+        val channelName = "Assessment"
+        val title = "Assessment"
         val cancel = "Cancel"
-        val body = "Long running task is running"
+        val body = "Submitting your previous assessment"
 
         val intent = WorkManager.getInstance(applicationContext)
             .createCancelPendingIntent(getId())
@@ -61,7 +62,9 @@ class ForegroundWorker(context: Context, parameters: WorkerParameters) :
             .setContentTitle(title)
             .setTicker(title)
             .setContentText(body)
-            .setSmallIcon(R.drawable.ic_baseline_notifications_24)
+            .setSmallIcon(android.R.drawable.stat_sys_upload_done)
+            .setProgress(100, 0, true)
+            .setAutoCancel(true)
             .setOngoing(true)
             .addAction(android.R.drawable.ic_delete, cancel, intent)
             .build()

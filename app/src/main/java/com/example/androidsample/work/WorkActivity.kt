@@ -1,5 +1,7 @@
 package com.example.androidsample.work
 
+import android.app.NotificationManager
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -43,6 +45,10 @@ class WorkActivity : AppCompatActivity() {
                     Log.e("TAG", "createOneTimeWorkRequest: WORK FINISHED")
                 }
             })
+
+        binding.btnCancel.setOnClickListener {
+            workManager.cancelWorkById(foregroundWorker.id)
+        }
     }
 
     private fun onInit() {
