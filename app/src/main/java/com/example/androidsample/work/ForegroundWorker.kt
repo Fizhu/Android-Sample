@@ -70,7 +70,7 @@ class ForegroundWorker(context: Context, parameters: WorkerParameters) :
     }
 
     private suspend fun runTask() {
-        delay(5000)
+        delay(10000)
     }
 
 }
