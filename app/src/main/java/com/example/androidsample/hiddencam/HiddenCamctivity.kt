@@ -26,11 +26,15 @@ class HiddenCamctivity : AppCompatActivity() {
 
     private fun checkPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(this)) {
-            val intent = Intent(
-                Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-                Uri.parse("package:$packageName")
-            )
-            startActivityForResult(intent, 5566)
+            if (Settings.canDrawOverlays(this)) {
+                startCamera()
+            } else {
+                val intent = Intent(
+                    Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                    Uri.parse("package:$packageName")
+                )
+                startActivityForResult(intent, 5566)
+            }
         }
     }
 
@@ -49,15 +53,17 @@ class HiddenCamctivity : AppCompatActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == 5566) {
-            startCamera()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (Settings.canDrawOverlays(this)) {
+                startCamera()
+            }
         }
         super.onActivityResult(requestCode, resultCode, data)
     }
 
     private fun onInit() {
         binding.btn.setOnClickListener {
-            checkPermission()
+            startCamera()
         }
     }
 }

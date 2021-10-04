@@ -277,10 +277,15 @@ class CameraService : Service(), SurfaceHolder.Callback {
         pref = applicationContext.getSharedPreferences("MyPref", 0)
         editor = pref?.edit()
         windowManager = getSystemService(WINDOW_SERVICE) as WindowManager
+        val LAYOUT_FLAG: Int = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
+        } else {
+            WindowManager.LayoutParams.TYPE_PHONE
+        }
         params = WindowManager.LayoutParams(
             WindowManager.LayoutParams.WRAP_CONTENT,
             WindowManager.LayoutParams.WRAP_CONTENT,
-            WindowManager.LayoutParams.TYPE_PHONE,
+            LAYOUT_FLAG,
             WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
             PixelFormat.TRANSLUCENT
         )
@@ -424,7 +429,6 @@ class CameraService : Service(), SurfaceHolder.Callback {
     }
 
     override fun surfaceChanged(holder: SurfaceHolder, format: Int, width: Int, height: Int) {
-        TODO("Not yet implemented")
     }
 
     override fun surfaceCreated(holder: SurfaceHolder) {

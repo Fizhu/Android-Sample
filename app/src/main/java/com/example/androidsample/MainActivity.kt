@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.androidsample.databinding.ActivityMainBinding
+import com.example.androidsample.hiddencam.HiddenCamctivity
 import com.example.androidsample.work.WorkActivity
 
 class MainActivity : AppCompatActivity() {
@@ -23,6 +24,14 @@ class MainActivity : AppCompatActivity() {
                 Intent(
                     this,
                     WorkActivity::class.java
+                )
+            )
+        }
+        binding.btnHiddenCam.setOnClickListener {
+            startActivity(
+                Intent(
+                    this,
+                    HiddenCamctivity::class.java
                 )
             )
         }
